@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+.Main-page {
+  background-color: #152938;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-text {
+  margin-bottom: 78px;
+  font-weight: 700;
+  font-size: 40px;
+  color: white;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+}
+
+.main-menu {
+  background-color: #FCFCFC;
+  height: auto;
+  width: 654px;
+  border-radius: 20px;
+}
+
+.theme-text {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #7191A5;
+  margin-bottom: 16px;
+  margin-top: 64px;
+}
+
+.theme {
+  margin: 56px;
+}
+
+.theme-btn {
+  width: 256px;
+  height: 52px;
+  border-radius: 26px;
+  border: none;
+  background-color: #BCCED9;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-btn p {
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #FCFCFC;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  height: 32px;
+  font-size: 26px;
+}
+
+.theme-btn1 {
+  width: 256px;
+  height: 52px;
+  border-radius: 26px;
+  border: none;
+  background-color: #BCCED9;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.theme-btn1 p {
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #FCFCFC;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  height: 32px;
+  font-size: 26px;
+}
+
+.active {
+  background-color: #304859 !important;
+}
+
+.grid-txt {
+  margin-top: 32px;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #7191A5;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.grid-btn {
+  width: 256px;
+  height: 52px;
+  border-radius: 26px;
+  border: none;
+  background-color: #BCCED9;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.grid-btn p {
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #FCFCFC;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  height: 32px;
+  font-size: 26px;
+}
+
+.grid-btn1 {
+  width: 256px;
+  height: 52px;
+  border-radius: 26px;
+  border: none;
+  background-color: #BCCED9;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-btn1 p {
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #FCFCFC;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  height: 32px;
+  font-size: 26px;
+}
+
+.activated {
+  background-color: #304859 !important;
+}
+
+.start-menu {
+  display: flex;
+}
+
+.start-btn {
+  margin-top: 33px;
+  width: 541px;
+  height: 70px;
+  border-radius: 35px;
+  border: none;
+  background-color: #FDA214;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 48px;
+}
+
+.start-btn p {
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #FCFCFC;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 32px;
+  cursor: pointer;
+}
