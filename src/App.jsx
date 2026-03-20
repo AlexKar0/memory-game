@@ -3,18 +3,21 @@ import Mainmenu from "./components/Mainmenu";
 import "./App.css";
 import MemoryButton from "./components/Memorybuttons";
 
+//komentarebi raxan miyenia ar nishnavs rom ais dawerilia mtlianad. chemtvis/chventvis rom iyos gasagebi imitom davamate
+
 function App() {
-  const [GameStarted, setGameStarted] = useState(false);
+  console.log("hello");
   const [Array, setArray] = useState([]);
+  const [GameStarted, setGameStarted] = useState(false);
+    const [ActiveButtonsTheme, setActiveButtonsTheme] = useState(["Numbers"]);
   const [flippedi, setFlippedi] = useState([]);
   const [flippedel, setFlippedel] = useState([]);
   const [matched, setMatched] = useState([]);
-  const [ActiveButtonsTheme, setActiveButtonsTheme] = useState(["Numbers"]);
   const [GridSizeBtns, setGridSizeBtns] = useState(["4x4"]);
   const [ComponentSize, setComponentSize] = useState(null);
+  const [gameTime, setGameTime] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [moveCount, setMoveCount] = useState(0);
-  const [gameTime, setGameTime] = useState(0);
   const [showVictoryWindow, setShowVictoryWindow] = useState(false);
   const timeoutRef = useRef(null);
   const gameTimerRef = useRef(null);
@@ -31,7 +34,7 @@ function App() {
       clearTimeout(timeoutRef.current); // Clear any pending timeouts
     }
     if (gameTimerRef.current) {
-      clearInterval(gameTimerRef.current); // Clear the game timer interval
+      clearInterval(gameTimerRef.current);
     }
     if (isMenuOpen) {
       toggleMenu(); 
@@ -45,7 +48,7 @@ function App() {
       const initialArray = [1, 2, 3, 4, 5, 6, 7, 8];
       setComponentSize("40px");
       if (ActiveButtonsTheme[0] == "Numbers") {
-        setArray(shuffle([...initialArray, ...initialArray]));
+        setArray(shuffle([...initialArray, ...initialArray])); // duplicates the array so each number appears twice, making pairs for the memory game
       } else if (ActiveButtonsTheme[0] == "Icons") {
         const iconsArray = initialArray.map((el) => `${el}.png`);
         setArray(shuffle([...iconsArray, ...iconsArray]));
@@ -56,10 +59,10 @@ function App() {
       ];
       setComponentSize("24px");
       if (ActiveButtonsTheme[0] == "Numbers") {
-        setArray(shuffle([...initialArray, ...initialArray])); // duplicates the array so each number appears twice, making pairs for the memory game
+        setArray(shuffle([...initialArray, ...initialArray]));
       } else if (ActiveButtonsTheme[0] == "Icons") {
-        const iconsArray = initialArray.map((el) => `${el}.png`); // creates an array of strings representing the file names of the icons, assuming they are named "1.png", "2.png", etc.
-        setArray(shuffle([...iconsArray, ...iconsArray]));
+        const iconsArray = initialArray.map((el) => `${el}.png`); // creates an array of strings representing the file names of the icons
+        setArray(shuffle([...iconsArray, ...iconsArray])); 
       }
     }
 
@@ -80,7 +83,6 @@ function App() {
   useEffect(() => {
     if (GameStarted) {
       initializeGame();
-      console.log("Stated");
     }
   }, [GameStarted]);
 
@@ -90,7 +92,7 @@ function App() {
 
   useEffect(() => {
     if (flippedel.length === 2 && flippedel[0] === flippedel[1]) {
-      const newMatchedel = [...matched, flippedel[0], flippedel[1]];
+      const newMatchedel = [...matched, flippedel[0], flippedel[1]]; // creates a new array that includes all the previously matched elements plus the two newly matched elements
       setMatched(newMatchedel);
 
       if (newMatchedel.length === Array.length) {
@@ -101,10 +103,10 @@ function App() {
           setShowVictoryWindow(true);
         }, 1.4 * 1000);
       }
-    }
+    } // If the two flipped elements do not match, they will be flipped back over after a short delay. This is achieved by setting a timeout that clears the flipped indices and elements after 1 second (1000 milliseconds).
 
     if (flippedel.length > 2) {
-      setFlippedel(flippedel.slice(2));
+      setFlippedel(flippedel.slice(2)); 
     }
   }, [flippedel]);
 
@@ -119,13 +121,13 @@ function App() {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-    }
+    } 
   }, [flippedi]);
 
   const shuffle = (array) => {
-    for (let i = array.length - 1; i >= 0; i--) {
-      let random = Math.floor(Math.random() * (i + 1));
-      [array[i], array[random]] = [array[random], array[i]];
+    for (let i = array.length - 1; i >= 0; i--) { // iterates through the array in reverse order, starting from the last index and moving towards the first index
+      let random = Math.floor(Math.random() * (i + 1)); // generates a random index between 0 and the current index (inclusive) using Math.random() and Math.floor()
+      [array[i], array[random]] = [array[random], array[i]]; // uses destructuring assignment to swap the elements at the current index (i) and the randomly generated index (random) in the array. This effectively shuffles the elements in the array.
     }
     return array;
   };
@@ -164,20 +166,19 @@ function App() {
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`; // formats the time in minutes and seconds, ensuring that seconds are always displayed as two digits (e.g., "0:05" instead of "0:5")
   };
 
   return (
     <main
-      style={{ background: !GameStarted ? "var(--black)" : "var(--White)" }}
     >
       {!GameStarted ? (
         <Mainmenu
           setGameStarted={setGameStarted}
           ActiveButtonsTheme={ActiveButtonsTheme}
-          setActiveButtonsTheme={setActiveButtonsTheme}
           GridSizeBtns={GridSizeBtns}
           setGridSizeBtns={setGridSizeBtns}
+          setActiveButtonsTheme={setActiveButtonsTheme}
         />
       ) : (
         <>
@@ -187,7 +188,7 @@ function App() {
               <button className="Restart" onClick={initializeGame}>
                 Restart
               </button>
-              <button className="NewGame" onClick={newGame}>
+              <button className="newGame" onClick={newGame}>
                 New Game
               </button>
             </div>
@@ -229,20 +230,20 @@ function App() {
             <div className="menu-positioner">
               <div className="menu-container">
                 <button
-                  className="Restart w-full bg-yellow-500 text-white py-3 rounded-[26px]"
+                  className="Restart"
                   onClick={initializeGame}
                 >
                   Restart
                 </button>
                 <button
-                  className="NewGame w-full bg-gray-200 text-gray-800 py-3 rounded-[26px]"
+                  className="NewGame"
                   onClick={newGame}
                 >
                   New Game
                 </button>
                 <button
                   onClick={toggleMenu}
-                  className="NewGame w-full bg-gray-200 text-gray-800 py-3 rounded-[26px]"
+                  className="NewGame"
                 >
                   Resume Game
                 </button>
@@ -251,10 +252,10 @@ function App() {
           )}
 
           {showVictoryWindow && (
-            <div className="menu-positioner fixed inset-0 flex items-center justify-center z-50">
-              <div className="menu-container bg-white flex flex-col items-center">
+            <div className="menu-positioner">
+              <div className="menu-container">
                 <div className="textBox">
-                  <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+                  <h2 className="congrats-text">
                     You did it!
                   </h2>
                   <p>Game over! Here's how you got on...</p>
@@ -272,15 +273,15 @@ function App() {
                   </div>
                 </div>
 
-                <div className="EndBtnBox flex w-full gap-4">
+                <div className="EndBtnBox">
                   <button
-                    className="Restart flex-1 bg-orange-500 text-white py-3 rounded-[26px] font-bold"
+                    className="Restart"
                     onClick={initializeGame}
                   >
                     Restart
                   </button>
                   <button
-                    className="NewGame flex-1 bg-gray-200 text-gray-800 py-3 rounded-[26px] font-bold"
+                    className="NewGame"
                     onClick={newGame}
                   >
                     Setup New Game
