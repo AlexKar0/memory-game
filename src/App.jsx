@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Mainmenu from "./components/Mainmenu";
 import "./App.css";
-import MemoryButton from "./components/Memorybuttons";
+import MemoryButton from "./components/MemoryButtons";
 
 import icon1 from "./components/images/1.png";
 import icon2 from "./components/images/2.png";
