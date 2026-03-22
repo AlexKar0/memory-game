@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./MemoryButtons.css";
+import "./MemoryButton.css";
 
 const MemoryButton = ({
   value,
