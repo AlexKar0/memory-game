@@ -13,7 +13,7 @@ import icon6 from "./components/images/6.png";
 
 const icons = [
   icon1, icon2, icon3, icon4, icon5,
-  icon6, icon7, icon8, icon9, icon10
+  icon6
 ];
 
 function App() {
