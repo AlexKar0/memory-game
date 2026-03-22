@@ -9,11 +9,14 @@ import icon3 from "./components/images/3.png";
 import icon4 from "./components/images/4.png";
 import icon5 from "./components/images/5.png";
 import icon6 from "./components/images/6.png";
-
+import icon7 from "./components/images/7.png";
+import icon8 from "./components/images/8.png";
+import icon9 from "./components/images/9.png";
+import icon10 from "./components/images/10.png";
 
 const icons = [
   icon1, icon2, icon3, icon4, icon5,
-  icon6
+  icon6, icon7, icon8, icon9, icon10
 ];
 
 function App() {
