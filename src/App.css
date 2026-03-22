@@ -112,11 +112,13 @@ button {
 .Restart {
   background-color: #FDA214;
   color: white;
+  border: none;
 }
 
 .NewGame {
   background-color: #dfe7ec;
   color: #304859;
+  border: none;
 }
 
 .Restart,
