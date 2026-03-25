@@ -12,13 +12,10 @@ const MemoryButton = ({
 
   const isFlipped = isActive || isMatched;
 
-  // ✅ detect if value is image or not
-  const isImage =
-    typeof value === "string" &&
-    (value.includes(".png") ||
-      value.includes(".jpg") ||
-      value.includes(".jpeg") ||
-      value.includes(".svg"));
+  // ✅ detect text (numbers OR letters)
+  const isText =
+    typeof value === "number" ||
+    (typeof value === "string" && value.length === 1);
 
   return (
     <div
@@ -38,19 +35,8 @@ const MemoryButton = ({
       onClick={!isMatched ? onClick : () => {}}
     >
       {isFlipped &&
-        (isImage ? (
-          // 🖼️ IMAGE
-          <img
-            src={value}
-            alt="icon"
-            style={{
-              width: ComponentSize,
-              height: ComponentSize,
-              transform: `scaleX(-1)`,
-            }}
-          />
-        ) : (
-          // 🔤 NUMBER OR LETTER
+        (isText ? (
+          // 🔤 numbers OR letters
           <h1
             style={{
               color: "var(--white)",
@@ -60,6 +46,17 @@ const MemoryButton = ({
           >
             {value}
           </h1>
+        ) : (
+          // 🖼️ image (icons)
+          <img
+            src={value}
+            alt="icon"
+            style={{
+              width: ComponentSize,
+              height: ComponentSize,
+              transform: `scaleX(-1)`,
+            }}
+          />
         ))}
     </div>
   );
