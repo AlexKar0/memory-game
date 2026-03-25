@@ -174,11 +174,11 @@ button {
 .InfoBox {
   width: 100%;
   padding: 0 24px;
-  position: absolute;
   bottom: 24px;
   display: flex;
   align-items: center;
   gap: 25px;
+  margin-top: 103px;
 }
 
 .InfoBox div {

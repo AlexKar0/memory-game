@@ -19,6 +19,9 @@ const icons = [
   icon6, icon7, icon8, icon9, icon10
 ];
 
+// ➕ extra "icons" (letters for 6x6 mode)
+const extraIcons = ["A","B","C","D","E","F","G","H"];
+
 function App() {
   const [Array, setArray] = useState([]);
   const [GameStarted, setGameStarted] = useState(false);
@@ -47,16 +50,10 @@ function App() {
 
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     if (gameTimerRef.current) clearInterval(gameTimerRef.current);
-
-    if (isMenuOpen) toggleMenu();
   };
 
   const initializeGame = () => {
     RefreshVariables();
-
-    if (gameTimerRef.current) {
-      clearInterval(gameTimerRef.current);
-    }
 
     let initialArray = [];
 
@@ -71,19 +68,26 @@ function App() {
       setComponentSize("24px");
     }
 
-
+    // 🎨 THEME LOGIC
     if (ActiveButtonsTheme[0] === "Numbers") {
       setArray(shuffle([...initialArray, ...initialArray]));
     }
 
-
     if (ActiveButtonsTheme[0] === "Icons") {
-      const shuffledIcons = shuffle([...icons]);
+      let fullIcons = [...icons];
+
+      // ➕ if 6x6 → add extra letters
+      if (initialArray.length > icons.length) {
+        fullIcons = [...icons, ...extraIcons];
+      }
+
+      const shuffledIcons = shuffle([...fullIcons]);
       const selectedIcons = shuffledIcons.slice(0, initialArray.length);
+
       setArray(shuffle([...selectedIcons, ...selectedIcons]));
     }
 
-    // ⏱️ TIMER
+    // ⏱️ TIMER RESET
     gameStartTimeRef.current = Date.now();
 
     gameTimerRef.current = setInterval(() => {
@@ -114,7 +118,7 @@ function App() {
         setTimeout(() => {
           if (gameTimerRef.current) clearInterval(gameTimerRef.current);
           setShowVictoryWindow(true);
-        }, 1400);
+        }, 800);
       }
     }
 
@@ -126,8 +130,8 @@ function App() {
   useEffect(() => {
     if (flippedi.length === 2) {
       timeoutRef.current = setTimeout(() => {
-        setFlippedi(flippedi.slice(2));
-        setFlippedel(flippedel.slice(2));
+        setFlippedi([]);
+        setFlippedel([]);
       }, 1000);
     }
   }, [flippedi]);
@@ -141,22 +145,19 @@ function App() {
   };
 
   const handleClick = (index, el) => {
+    if (flippedi.length === 2) return;
+    if (flippedi.includes(index)) return;
 
-  if (flippedi.length === 2) return;
+    const newFlippedi = [...flippedi, index];
+    const newFlippedel = [...flippedel, el];
 
+    setFlippedel(newFlippedel);
+    setFlippedi(newFlippedi);
 
-  if (flippedi.includes(index)) return;
-
-  const newFlippedi = [...flippedi, index];
-  const newFlippedel = [...flippedel, el];
-
-  setFlippedel(newFlippedel);
-  setFlippedi(newFlippedi);
-
-  if (newFlippedi.length === 2) {
-    setMoveCount(prev => prev + 1);
-  }
-}
+    if (newFlippedi.length === 2) {
+      setMoveCount(prev => prev + 1);
+    }
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -182,14 +183,17 @@ function App() {
         <>
           <div className="header">
             <h1 className="headname">memory</h1>
+
             <div className="ButtonBox">
               <button className="Restart" onClick={initializeGame}>
                 Restart
               </button>
+
               <button className="NewGame" onClick={newGame}>
                 New Game
               </button>
             </div>
+
             <button className="menu" onClick={toggleMenu}>
               Menu
             </button>
@@ -219,11 +223,24 @@ function App() {
               <h1>Time</h1>
               <span>{formatTime(gameTime)}</span>
             </div>
+
             <div className="MoveCount">
               <h1>Move Count</h1>
               <span>{moveCount}</span>
             </div>
           </div>
+
+          {/* 🏆 VICTORY WINDOW */}
+          {showVictoryWindow && (
+            <div className="VictoryWindow">
+              <h1>You Won! 🎉</h1>
+              <p>Time: {formatTime(gameTime)}</p>
+              <p>Moves: {moveCount}</p>
+
+              <button onClick={initializeGame}>Play Again</button>
+              <button onClick={newGame}>Main Menu</button>
+            </div>
+          )}
         </>
       )}
     </main>
