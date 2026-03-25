@@ -12,7 +12,7 @@ const MemoryButton = ({
 
   const isFlipped = isActive || isMatched;
 
-  // ✅ detect text (numbers OR letters)
+
   const isText =
     typeof value === "number" ||
     (typeof value === "string" && value.length === 1);
@@ -32,29 +32,35 @@ const MemoryButton = ({
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={!isMatched ? onClick : () => {}}
+      onClick={(e) => {
+        e.preventDefault();        
+        e.stopPropagation();       
+        if (!isMatched) onClick();
+      }}
     >
       {isFlipped &&
         (isText ? (
-          // 🔤 numbers OR letters
           <h1
             style={{
               color: "var(--white)",
               fontSize: ComponentSize,
               transform: `scaleX(-1)`,
+              userSelect: "none"
             }}
           >
             {value}
           </h1>
         ) : (
-          // 🖼️ image (icons)
           <img
             src={value}
             alt="icon"
+            draggable={false}
             style={{
               width: ComponentSize,
               height: ComponentSize,
               transform: `scaleX(-1)`,
+              pointerEvents: "none",
+              userSelect: "none"
             }}
           />
         ))}
