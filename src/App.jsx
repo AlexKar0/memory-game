@@ -230,17 +230,39 @@ function App() {
             </div>
           </div>
 
-          {/* 🏆 VICTORY WINDOW */}
           {showVictoryWindow && (
-            <div className="VictoryWindow">
-              <h1>You Won! 🎉</h1>
-              <p>Time: {formatTime(gameTime)}</p>
-              <p>Moves: {moveCount}</p>
+  <div className="victory-positioner">
+    <div className="VictoryWindow">
+      <h1>You did it! 🎉</h1>
 
-              <button onClick={initializeGame}>Play Again</button>
-              <button onClick={newGame}>Main Menu</button>
-            </div>
-          )}
+      <p className="victory-sub">
+        Game over! Here’s how you got on…
+      </p>
+
+      <div className="StatsContainer">
+        <div>
+          <p>Time Elapsed</p>
+          <span>{formatTime(gameTime)}</span>
+        </div>
+
+        <div>
+          <p>Moves Taken</p>
+          <span>{moveCount}</span>
+        </div>
+      </div>
+
+      <div className="EndBtnBox">
+        <button className="Restart" onClick={initializeGame}>
+          Play Again
+        </button>
+
+        <button className="NewGame" onClick={newGame}>
+          Main Menu
+        </button>
+      </div>
+    </div>
+  </div>
+)}
         </>
       )}
     </main>

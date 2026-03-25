@@ -457,5 +457,69 @@ button {
     width: 260px;
     height: 54px;
   }
+
+.victory-positioner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+
+.VictoryWindow {
+  background-color: white;
+  width: 90%;
+  max-width: 400px;
+  padding: 32px 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+
+  animation: popIn 0.3s ease;
+}
+
+
+.VictoryWindow h1 {
+  font-size: 24px;
+  font-weight: 900;
+  color: #152938;
+}
+
+
+.victory-sub {
+  color: #7191A5;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+
+.VictoryWindow .StatsContainer div {
+  background-color: #DFE7EC;
+  border-radius: 8px;
+}
+
+
+.VictoryWindow .EndBtnBox {
+  margin-top: 10px;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 }
 
